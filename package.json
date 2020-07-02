@@ -1,0 +1,55 @@
+{
+  "name": "@josefaidt/root",
+  "private": true,
+  "author": "Josef Aidt <josef.aidt@gmail.com>",
+  "scripts": {
+    "theme": "yarn workspace @josefaidt/gatsby-theme run",
+    "demo": "yarn workspace @josefaidt/demo run",
+    "build": "yarn demo build",
+    "clean": "rm -rf node_modules **/node_modules yarn.lock",
+    "reload": "yarn clean; yarn install"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/josefaidt/josefaidt.github.io"
+  },
+  "workspaces": [
+    "app",
+    "theme",
+    "demo",
+    "resume"
+  ],
+  "devDependencies": {
+    "@josefaidt/eslint-config": "^0.1.11",
+    "@josefaidt/prettier-config": "^0.0.2",
+    "eslint": "^6.8.0",
+    "husky": "^4.2.1",
+    "lint-staged": "^10.0.7",
+    "netlify-cli": "^2.46.0",
+    "prettier": "^1.19.1"
+  },
+  "eslintConfig": {
+    "extends": "@josefaidt/eslint-config",
+    "parserOptions": {
+      "ecmaVersion": 9,
+      "sourceType": "module"
+    }
+  },
+  "prettier": "@josefaidt/prettier-config",
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{md,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}
